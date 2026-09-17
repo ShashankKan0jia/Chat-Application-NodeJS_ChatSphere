@@ -20,7 +20,6 @@ mongoose
   .catch((err) => {
     console.log(`MongodDB's mongoose failed to connect`, err);
   });
-
 // Define a schema for Chat Messages
 const chatSchema = new mongoose.Schema({
   message: String,
@@ -46,8 +45,8 @@ io.on("connection", (socket) => {
 
     // Create a new chat message instance
     const chatMessage = new ChatMessage({
-      message: msg.text, // Assuming the message text is in msg.text
-      username: msg.username, // Assuming the username is in msg.username
+      message: msg.message,
+      username: msg.user,
     });
 
     // Save the message to MongoDB Atlas
