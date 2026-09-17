@@ -5,10 +5,12 @@ const mongoose = require("mongoose");
 const io = require("socket.io")(http);
 
 const PORT = process.env.PORT || 3000;
+const db = process.env.MONGODB_URI;
 
-// MongoDB Atlas connection string - ensure to replace <password>, <dbname>, and other placeholders
-const db =
-  "mongodb+srv://kanojiashashank87:DeZ4dDzoYTbpCjZd@chatappcluster.c9aaqih.mongodb.net/?retryWrites=true&w=majority&appName=chatappcluster";
+if (!db) {
+  console.error("MONGODB_URI environment variable is required");
+  process.exit(1);
+}
 
 mongoose
   .connect(db)
@@ -18,7 +20,7 @@ mongoose
   .catch((err) => {
     console.log(`MongodDB's mongoose failed to connect`, err);
   });
-// DeZ4dDzoYTbpCjZd
+
 // Define a schema for Chat Messages
 const chatSchema = new mongoose.Schema({
   message: String,
