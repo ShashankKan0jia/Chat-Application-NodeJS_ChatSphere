@@ -38,11 +38,14 @@ function appendMessage(msg, type) {
   let className = type;
   mainDiv.classList.add(className, "message");
 
-  let markup = `
-        <h4>${msg.user}</h4>
-        <p>${msg.message}</p>
-    `;
-  mainDiv.innerHTML = markup;
+  const userHeading = document.createElement("h4");
+  userHeading.textContent = msg.user;
+
+  const messageParagraph = document.createElement("p");
+  messageParagraph.textContent = msg.message;
+
+  mainDiv.appendChild(userHeading);
+  mainDiv.appendChild(messageParagraph);
   messageArea.appendChild(mainDiv);
 }
 
