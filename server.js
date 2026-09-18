@@ -40,6 +40,11 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
   console.log("Connected...");
   socket.on("message", (msg) => {
+    // Ignore malformed message payloads instead of throwing on msg.message
+    if (!msg || typeof msg !== "object" || typeof msg.message !== "string") {
+      return;
+    }
+
     // Log the received message and broadcast it
     console.log("Received message:", msg);
 
