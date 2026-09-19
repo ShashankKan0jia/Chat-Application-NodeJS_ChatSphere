@@ -22,7 +22,7 @@ mongoose
   });
 // Define a schema for Chat Messages
 const chatSchema = new mongoose.Schema({
-  message: String,
+  message: { type: String, maxlength: 2000 },
   timestamp: { type: Date, default: Date.now },
   username: String, // Optionally, include more fields as necessary
 });
@@ -41,7 +41,13 @@ io.on("connection", (socket) => {
   console.log("Connected...");
   socket.on("message", (msg) => {
     // Ignore malformed message payloads instead of throwing on msg.message
-    if (!msg || typeof msg !== "object" || typeof msg.message !== "string") {
+    if (
+      !msg ||
+      typeof msg !== "object" ||
+      typeof msg.message !== "string" ||
+      msg.message.length === 0 ||
+      msg.message.length > 2000
+    ) {
       return;
     }
 
