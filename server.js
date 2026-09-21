@@ -18,7 +18,8 @@ mongoose
     console.log(`MongodDB's mongoose is connected`);
   })
   .catch((err) => {
-    console.log(`MongodDB's mongoose failed to connect`, err);
+    console.error(`MongodDB's mongoose failed to connect`, err);
+    process.exit(1);
   });
 // Define a schema for Chat Messages
 const chatSchema = new mongoose.Schema({
