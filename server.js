@@ -24,7 +24,7 @@ mongoose
 const chatSchema = new mongoose.Schema({
   message: { type: String, maxlength: 2000 },
   timestamp: { type: Date, default: Date.now },
-  username: String, // Optionally, include more fields as necessary
+  username: { type: String, maxlength: 100 },
 });
 
 // Create a model from the schema
@@ -45,19 +45,30 @@ io.on("connection", (socket) => {
       !msg ||
       typeof msg !== "object" ||
       typeof msg.message !== "string" ||
-      msg.message.length === 0 ||
-      msg.message.length > 2000
+      typeof msg.user !== "string"
     ) {
       return;
     }
 
-    // Log the received message and broadcast it
-    console.log("Received message:", msg);
+    const message = msg.message.trim();
+    const username = msg.user.trim();
+
+    if (!message || message.length > 2000 || !username || username.length > 100) {
+      return;
+    }
+
+    const normalizedMessage = {
+      user: username,
+      message,
+    };
+
+    // Log the normalized message and broadcast it
+    console.log("Received message:", normalizedMessage);
 
     // Create a new chat message instance
     const chatMessage = new ChatMessage({
-      message: msg.message,
-      username: msg.user,
+      message,
+      username,
     });
 
     // Save the message to MongoDB Atlas
@@ -70,7 +81,7 @@ io.on("connection", (socket) => {
         console.error("Error saving message to MongoDB Atlas:", err);
       });
 
-    socket.broadcast.emit("message", msg);
+    socket.broadcast.emit("message", normalizedMessage);
   });
 });
 
