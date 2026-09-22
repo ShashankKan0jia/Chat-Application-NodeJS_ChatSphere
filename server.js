@@ -21,27 +21,23 @@ mongoose
     console.error(`MongodDB's mongoose failed to connect`, err);
     process.exit(1);
   });
-// Define a schema for Chat Messages
+
 const chatSchema = new mongoose.Schema({
-  message: { type: String, maxlength: 2000 },
+  message: { type: String, required: true, trim: true, maxlength: 2000 },
   timestamp: { type: Date, default: Date.now },
-  username: { type: String, maxlength: 100 },
+  username: { type: String, required: true, trim: true, maxlength: 100 },
 });
 
-// Create a model from the schema
 const ChatMessage = mongoose.model("ChatMessage", chatSchema);
 
-// Middleware and static files
 app.use(express.static(__dirname + "/public"));
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-// Socket.IO handling
 io.on("connection", (socket) => {
   console.log("Connected...");
   socket.on("message", (msg) => {
-    // Ignore malformed message payloads instead of throwing on msg.message
     if (
       !msg ||
       typeof msg !== "object" ||
@@ -63,16 +59,13 @@ io.on("connection", (socket) => {
       message,
     };
 
-    // Log the normalized message and broadcast it
     console.log("Received message:", normalizedMessage);
 
-    // Create a new chat message instance
     const chatMessage = new ChatMessage({
       message,
       username,
     });
 
-    // Save the message to MongoDB Atlas
     chatMessage
       .save()
       .then(() => {
@@ -86,7 +79,6 @@ io.on("connection", (socket) => {
   });
 });
 
-// Start server
 http.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
