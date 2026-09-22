@@ -70,12 +70,11 @@ io.on("connection", (socket) => {
       .save()
       .then(() => {
         console.log("Message saved to MongoDB Atlas");
+        socket.broadcast.emit("message", normalizedMessage);
       })
       .catch((err) => {
         console.error("Error saving message to MongoDB Atlas:", err);
       });
-
-    socket.broadcast.emit("message", normalizedMessage);
   });
 });
 
