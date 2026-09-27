@@ -7,8 +7,8 @@ let messageArea = document.querySelector(".message__area");
 
 
 do {
-  name1 = prompt("Please enter your name: ");
-} while (!name1);
+  name1 = prompt("Please enter your name: ")?.trim();
+} while (!name1 || name1.length > 100);
 
 textarea.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
