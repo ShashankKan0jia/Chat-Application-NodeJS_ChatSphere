@@ -57,6 +57,18 @@ function appendMessage(msg, type) {
 
 // Recieve messages
 socket.on("message", (msg) => {
+  if (
+    !msg ||
+    typeof msg.user !== "string" ||
+    typeof msg.message !== "string" ||
+    !msg.user.trim() ||
+    !msg.message.trim() ||
+    msg.user.length > 100 ||
+    msg.message.length > 2000
+  ) {
+    return;
+  }
+
   appendMessage(msg, "incoming");
   scrollToBottom();
 });
