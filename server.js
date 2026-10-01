@@ -15,10 +15,10 @@ if (!db) {
 mongoose
   .connect(db)
   .then(() => {
-    console.log(`MongodDB's mongoose is connected`);
+    console.log(`MongoDB's mongoose is connected`);
   })
   .catch((err) => {
-    console.error(`MongodDB's mongoose failed to connect`, err);
+    console.error(`MongoDB's mongoose failed to connect`, err);
     process.exit(1);
   });
 
