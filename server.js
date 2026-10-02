@@ -74,6 +74,9 @@ io.on("connection", (socket) => {
       })
       .catch((err) => {
         console.error("Error saving message to MongoDB Atlas:", err);
+        socket.emit("messageError", {
+          message: "Your message could not be sent. Please try again.",
+        });
       });
   });
 });
