@@ -55,6 +55,16 @@ function appendMessage(msg, type) {
   messageArea.appendChild(mainDiv);
 }
 
+socket.on("messageError", (error) => {
+  const message = typeof error?.message === "string" ? error.message.trim() : "";
+  if (!message) {
+    return;
+  }
+
+  appendMessage({ user: "System", message }, "incoming");
+  scrollToBottom();
+});
+
 // Recieve messages
 socket.on("message", (msg) => {
   if (
