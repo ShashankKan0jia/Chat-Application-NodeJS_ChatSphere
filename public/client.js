@@ -3,9 +3,6 @@ let name1;
 let textarea = document.querySelector("#textarea");
 let messageArea = document.querySelector(".message__area");
 
-
-
-
 do {
   name1 = prompt("Please enter your name: ")?.trim();
 } while (!name1 || name1.length > 100);
@@ -14,15 +11,17 @@ textarea.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     sendMessage(e.target.value);
-    
-
   }
 });
-
 
 function sendMessage(message) {
   const trimmedMessage = message.trim();
   if (!trimmedMessage) {
+    return;
+  }
+
+  if (trimmedMessage.length > 2000) {
+    alert("Messages must be 2000 characters or fewer.");
     return;
   }
 
