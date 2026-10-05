@@ -7,8 +7,8 @@ do {
   name1 = prompt("Please enter your name: ")?.trim();
 } while (!name1 || name1.length > 100);
 
-textarea.addEventListener("keyup", (e) => {
-  if (e.key === "Enter") {
+textarea.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     sendMessage(e.target.value);
   }
