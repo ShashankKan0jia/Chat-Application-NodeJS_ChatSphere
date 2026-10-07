@@ -7,6 +7,10 @@ do {
   name1 = prompt("Please enter your name: ")?.trim();
 } while (!name1 || name1.length > 100);
 
+if (!textarea || !messageArea) {
+  throw new Error("Chat interface elements are unavailable.");
+}
+
 textarea.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
