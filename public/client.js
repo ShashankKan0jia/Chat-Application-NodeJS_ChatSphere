@@ -60,7 +60,9 @@ function appendMessage(msg, type) {
 
 socket.on("messageError", (error) => {
   const message = typeof error?.message === "string" ? error.message.trim() : "";
-  if (!message) {
+  if (!message || message.length > 2000) {
+    return;
+  }
     return;
   }
 
