@@ -62,8 +62,9 @@ io.on("connection", (socket) => {
     console.log("Received message:", normalizedMessage);
 
     const chatMessage = new ChatMessage({
+    const chatMessage = new ChatMessage({
       message,
-      username,
+      username: normalizedMessage.user,
     });
 
     chatMessage
