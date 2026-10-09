@@ -33,19 +33,15 @@ function sendMessage(message) {
     user: name1,
     message: trimmedMessage,
   };
-  // Append
   appendMessage(msg, "outgoing");
   textarea.value = "";
   scrollToBottom();
-
-  // Send to server
   socket.emit("message", msg);
 }
 
 function appendMessage(msg, type) {
   let mainDiv = document.createElement("div");
-  let className = type;
-  mainDiv.classList.add(className, "message");
+  mainDiv.classList.add(type, "message");
 
   const userHeading = document.createElement("h4");
   userHeading.textContent = msg.user;
@@ -63,14 +59,11 @@ socket.on("messageError", (error) => {
   if (!message || message.length > 2000) {
     return;
   }
-    return;
-  }
 
   appendMessage({ user: "System", message }, "incoming");
   scrollToBottom();
 });
 
-// Recieve messages
 socket.on("message", (msg) => {
   if (
     !msg ||
