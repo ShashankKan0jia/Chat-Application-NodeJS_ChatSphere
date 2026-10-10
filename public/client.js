@@ -1,11 +1,14 @@
 const socket = io();
-let name1;
+let name1 = prompt("Please enter your name: ")?.trim();
+if (!name1) {
+  name1 = "Guest";
+} else if (name1.length > 100) {
+  alert("Names must be 100 characters or fewer. Using Guest instead.");
+  name1 = "Guest";
+}
+
 let textarea = document.querySelector("#textarea");
 let messageArea = document.querySelector(".message__area");
-
-do {
-  name1 = prompt("Please enter your name: ")?.trim();
-} while (!name1 || name1.length > 100);
 
 if (!textarea || !messageArea) {
   throw new Error("Chat interface elements are unavailable.");
