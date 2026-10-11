@@ -65,6 +65,11 @@ textarea {
   color: #787986;
   margin-left: auto;
 }
+.message p {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
 .message h4 {
   position: absolute;
   top: -20px;
