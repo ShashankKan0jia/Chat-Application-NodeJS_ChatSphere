@@ -59,7 +59,8 @@ io.on("connection", (socket) => {
       message,
     };
 
-    console.log("Received message:", normalizedMessage);
+    // Avoid writing private chat contents to application logs.
+    console.log("Received valid chat message");
 
     const chatMessage = new ChatMessage({
       message,
