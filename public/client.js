@@ -55,6 +55,11 @@ function appendMessage(msg, type) {
   mainDiv.appendChild(userHeading);
   mainDiv.appendChild(messageParagraph);
   messageArea.appendChild(mainDiv);
+
+  // Keep long-running chats from growing the DOM without bound.
+  while (messageArea.children.length > 200) {
+    messageArea.firstElementChild.remove();
+  }
 }
 
 socket.on("messageError", (error) => {
