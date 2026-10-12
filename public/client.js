@@ -89,6 +89,24 @@ socket.on("message", (msg) => {
   scrollToBottom();
 });
 
+let connectionNoticeShown = false;
+socket.on("connect_error", () => {
+  if (connectionNoticeShown) {
+    return;
+  }
+
+  connectionNoticeShown = true;
+  appendMessage(
+    { user: "System", message: "Unable to connect to chat. Check your connection and try again." },
+    "incoming"
+  );
+  scrollToBottom();
+});
+
+socket.on("connect", () => {
+  connectionNoticeShown = false;
+});
+
 function scrollToBottom() {
   messageArea.scrollTop = messageArea.scrollHeight;
 }
