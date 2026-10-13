@@ -103,6 +103,19 @@ socket.on("connect_error", () => {
   scrollToBottom();
 });
 
+socket.on("disconnect", () => {
+  if (connectionNoticeShown) {
+    return;
+  }
+
+  connectionNoticeShown = true;
+  appendMessage(
+    { user: "System", message: "Connection to chat was lost. Reconnecting…" },
+    "incoming"
+  );
+  scrollToBottom();
+});
+
 socket.on("connect", () => {
   connectionNoticeShown = false;
 });
