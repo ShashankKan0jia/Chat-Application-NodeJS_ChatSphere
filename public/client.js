@@ -32,6 +32,15 @@ function sendMessage(message) {
     return;
   }
 
+  if (!socket.connected) {
+    appendMessage(
+      { user: "System", message: "Message not sent because chat is disconnected. Please reconnect and try again." },
+      "incoming"
+    );
+    scrollToBottom();
+    return;
+  }
+
   let msg = {
     user: name1,
     message: trimmedMessage,
