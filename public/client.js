@@ -15,7 +15,7 @@ if (!textarea || !messageArea) {
 }
 
 textarea.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && !e.shiftKey && e.isComposing !== true) {
+  if (e.key === "Enter" && !e.repeat && !e.shiftKey && e.isComposing !== true) {
     e.preventDefault();
     sendMessage(e.target.value);
   }
