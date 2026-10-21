@@ -15,10 +15,14 @@ if (!db) {
 mongoose
   .connect(db)
   .then(() => {
-    console.log(`MongoDB's mongoose is connected`);
+    console.log("MongoDB connected successfully");
+    http.listen(PORT, () => {
+      console.log(`Listening on port ${PORT}`);
+    });
   })
-  .catch((err) => {
-    console.error(`MongoDB's mongoose failed to connect`, err);
+  .catch(() => {
+    // Do not log the raw connection error, which may contain credentials.
+    console.error("MongoDB connection failed. Check MONGODB_URI and database availability.");
     process.exit(1);
   });
 
@@ -82,6 +86,3 @@ io.on("connection", (socket) => {
   });
 });
 
-http.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
