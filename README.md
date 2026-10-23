@@ -10,7 +10,7 @@ A real-time messaging application built with Node.js and Socket.io.
 - Browser-based chat interface
 
 ## Stack
-Node.js, Express, Socket.io, HTML/CSS/JavaScript.
+Node.js, Express, Socket.io, MongoDB/Mongoose, HTML/CSS/JavaScript.
 
 ## Run locally
 
