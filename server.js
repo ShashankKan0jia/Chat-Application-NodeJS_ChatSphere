@@ -3,7 +3,9 @@ const app = express();
 app.disable("x-powered-by");
 const http = require("http").createServer(app);
 const mongoose = require("mongoose");
-const io = require("socket.io")(http);
+const io = require("socket.io")(http, {
+  maxHttpBufferSize: 1e6,
+});
 
 const PORT = process.env.PORT || 3000;
 const db = process.env.MONGODB_URI;
