@@ -77,11 +77,11 @@ io.on("connection", (socket) => {
     chatMessage
       .save()
       .then(() => {
-        console.log("Message saved to MongoDB Atlas");
+        console.log("Message saved to MongoDB");
         socket.broadcast.emit("message", normalizedMessage);
       })
       .catch((err) => {
-        console.error("Error saving message to MongoDB Atlas.");
+        console.error("Error saving message to MongoDB.");
         socket.emit("messageError", {
           message: "Your message could not be sent. Please try again.",
         });
