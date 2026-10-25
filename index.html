@@ -18,10 +18,12 @@
           id="textarea"
           maxlength="2000"
           aria-label="Chat message"
+          aria-describedby="composerHint"
           cols="30"
           rows="1"
           placeholder="Write a message..."
         ></textarea>
+        <p id="composerHint">Press Enter to send; use Shift+Enter for a new line.</p>
       </div>
     </section>
     <script src="/socket.io/socket.io.js"></script>
