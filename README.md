@@ -14,7 +14,7 @@ Node.js, Express, Socket.io, MongoDB/Mongoose, HTML/CSS/JavaScript.
 
 ## Run locally
 
-1. Install Node.js and MongoDB Atlas (or another MongoDB instance).
+1. Use Node.js 20.19.0 or newer (required by Mongoose 9) and configure MongoDB Atlas or another MongoDB instance.
 2. Install dependencies:
    ```sh
    npm install
